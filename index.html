@@ -1,236 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cloud Browser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --accent: #377dff;
-      --accent-light: #e6f0ff;
-      --bg: #f9fafc;
-      --bar-bg: #fff;
-      --bar-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      --border: #e3e6ea;
-      --input-bg: #f3f6fa;
-      --input-focus: #e6f0ff;
-      --text: #1a1a1a;
-    }
-    body[data-theme="dark"], html[data-theme="dark"] {
-      --accent: #7baaff;
-      --accent-light: #223455;
-      --bg: #15181c;
-      --bar-bg: #20242a;
-      --bar-shadow: 0 2px 8px rgba(20,40,80,0.35);
-      --border: #31343a;
-      --input-bg: #191c22;
-      --input-focus: #232943;
-      --text: #f3f3f3;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-      box-sizing: border-box;
-      transition: background 0.2s, color 0.2s;
-      min-height: 100vh;
-    }
-    #container {
-      max-width: 500px;
-      margin: 60px auto 0 auto;
-      background: var(--bar-bg);
-      border-radius: 16px;
-      box-shadow: var(--bar-shadow);
-      padding: 36px 28px 28px 28px;
-      border: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      min-height: 240px;
-      transition: background 0.2s, box-shadow 0.2s, border 0.2s;
-    }
-    #logo {
-      font-size: 2.1em;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--accent);
-      text-align: center;
-      margin-bottom: 26px;
-      user-select: none;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    #mode-toggle {
-      background: none;
-      border: none;
-      font-size: 1.35em;
-      cursor: pointer;
-      color: var(--accent);
-      transition: color 0.2s;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 4px;
-    }
-    #mode-toggle:focus, #mode-toggle:hover {
-      background: var(--accent-light);
-      outline: none;
-    }
-    #browser-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    #address {
-      flex: 1;
-      padding: 14px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 1.1em;
-      background: var(--input-bg);
-      color: var(--text);
-      outline: none;
-      transition: border 0.15s, background 0.15s, color 0.2s;
-      box-sizing: border-box;
-    }
-    #address:focus {
-      border: 1.5px solid var(--accent);
-      background: var(--input-focus);
-    }
-    #go-btn {
-      padding: 12px 24px;
-      font-size: 1.08em;
-      font-weight: 600;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(55,125,255,0.09);
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    #go-btn:hover, #go-btn:focus {
-      background: #255ccc;
-    }
-    #tip {
-      color: #888;
-      font-size: 0.98em;
-      margin-top: 16px;
-      text-align: center;
-      opacity: 0.93;
-      letter-spacing: 0.01em;
-      transition: color 0.2s;
-    }
-    body[data-theme="dark"] #tip {
-      color: #aaa;
-    }
-    @media (max-width: 600px) {
-      #container {
-        max-width: 100vw;
-        margin: 0;
-        border-radius: 0;
-        min-height: 100vh;
-        box-shadow: none;
-        padding: 26px 7vw 28px 7vw;
-      }
-      #logo { font-size: 1.5em; }
-      #address { font-size: 1em; }
-      #go-btn { font-size: 1em; padding: 11px 16px; }
-    }
-  </style>
+<meta charset="UTF-8"><title>Cloud Browser</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--accent:#377dff;--accent-light:#e6f0ff;--bg:#f9fafc;--bar-bg:#fff;--bar-shadow:0 2px 8px rgba(0,0,0,0.06);--border:#e3e6ea;--input-bg:#f3f6fa;--input-focus:#e6f0ff;--text:#1a1a1a;}
+body[data-theme=dark],html[data-theme=dark]{--accent:#7baaff;--accent-light:#223455;--bg:#15181c;--bar-bg:#20242a;--bar-shadow:0 2px 8px rgba(20,40,80,0.35);--border:#31343a;--input-bg:#191c22;--input-focus:#232943;--text:#f3f3f3;}
+html,body{height:100%;margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Segoe UI','Roboto',Arial,sans-serif;box-sizing:border-box;transition:background .2s,color .2s;min-height:100vh;}
+#container{max-width:500px;margin:60px auto 0 auto;background:var(--bar-bg);border-radius:16px;box-shadow:var(--bar-shadow);padding:36px 28px 28px 28px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:stretch;min-height:240px;transition:background .2s,box-shadow .2s,border .2s;}
+#logo{font-size:2.1em;font-weight:700;letter-spacing:-.01em;color:var(--accent);text-align:center;margin-bottom:26px;user-select:none;transition:color .2s;display:flex;align-items:center;justify-content:center;gap:12px;}
+#mode-toggle{background:none;border:none;font-size:1.35em;cursor:pointer;color:var(--accent);transition:color .2s;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;margin-left:4px;}
+#mode-toggle:focus,#mode-toggle:hover{background:var(--accent-light);outline:none;}
+#browser-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;position:relative;}
+#address{flex:1;padding:14px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:1.1em;background:var(--input-bg);color:var(--text);outline:none;transition:border .15s,background .15s,color .2s;box-sizing:border-box;}
+#address:focus{border:1.5px solid var(--accent);background:var(--input-focus);}
+#go-btn{padding:12px 24px;font-size:1.08em;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:8px;box-shadow:0 2px 8px rgba(55,125,255,0.09);cursor:pointer;transition:background .15s;}
+#go-btn:hover,#go-btn:focus{background:#255ccc;}
+#tip{color:#888;font-size:.98em;margin-top:16px;text-align:center;opacity:.93;letter-spacing:.01em;transition:color .2s;}
+body[data-theme=dark] #tip{color:#aaa;}
+@media (max-width:600px){
+#container{max-width:100vw;margin:0;border-radius:0;min-height:100vh;box-shadow:none;padding:26px 7vw 28px 7vw;}
+#logo{font-size:1.5em;}
+#address{font-size:1em;}
+#go-btn{font-size:1em;padding:11px 16px;}
+}
+#suggestions{margin-top:2px;position:absolute;left:0;z-index:100;width:100%;background:var(--bar-bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;box-shadow:0 8px 24px rgba(0,0,0,.08);max-height:200px;overflow-y:auto;display:none;}
+#suggestions ul{list-style:none;margin:0;padding:0;}
+#suggestions li{padding:10px 16px;cursor:pointer;font-size:1em;}
+#suggestions li:hover,#suggestions li.selected{background:var(--accent-light);}
+</style>
 </head>
 <body>
-  <div id="container">
-    <div id="logo">
-      🌥️ Basic Browser
-      <button id="mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
-    </div>
-    <div id="browser-bar">
-      <input type="text" id="address" placeholder="Enter URL or search term..." autocomplete="off" autofocus />
-      <button id="go-btn">Go</button>
-    </div>
-    <div id="tip">
-      Enter a website (e.g. <b>github.com</b>) or search term.<br>
-      <span style="font-size:0.92em;">Websites and searches open in a new tab.</span>
-    </div>
+<div id="container">
+  <div id="logo">🌥️ Cloud Browser
+    <button id="mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
   </div>
-  <script>
-    const addressInput = document.getElementById('address');
-    const goBtn = document.getElementById('go-btn');
-    const modeToggle = document.getElementById('mode-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // --- Dark mode logic ---
-    function setTheme(theme) {
-      document.body.setAttribute('data-theme', theme);
-      document.documentElement.setAttribute('data-theme', theme);
-      // Update button icon
-      modeToggle.innerText = (theme === "dark") ? "☀️" : "🌙";
-    }
-
-    function getSavedTheme() {
-      return localStorage.getItem('cloudbrowser-theme');
-    }
-
-    function saveTheme(theme) {
-      localStorage.setItem('cloudbrowser-theme', theme);
-    }
-
-    function detectAndApplyTheme() {
-      const saved = getSavedTheme();
-      if (saved) {
-        setTheme(saved);
-      } else if (prefersDark.matches) {
-        setTheme("dark");
-      } else {
-        setTheme("light");
-      }
-    }
-
-    modeToggle.onclick = function () {
-      const current = document.body.getAttribute('data-theme');
-      const next = current === "dark" ? "light" : "dark";
-      setTheme(next);
-      saveTheme(next);
-    };
-
-    // --- Browser logic ---
-    function isProbablyURL(text) {
-      return /^https?:\/\//i.test(text) || /^[\w-]+\.[\w./?#=&%-]+$/i.test(text);
-    }
-
-    function load() {
-      const value = addressInput.value.trim();
-      if (!value) return;
-      if (isProbablyURL(value)) {
-        let url = value;
-        if (!/^https?:\/\//i.test(url)) url = 'http://' + url;
-        window.open(url, "_blank");
-      } else {
-        // Treat as search, open Google search in a new tab
-        const search = encodeURIComponent(value);
-        window.open(`https://www.google.com/search?q=${search}`, "_blank");
-      }
-    }
-
-    goBtn.onclick = load;
-    addressInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') load();
-    });
-
-    // Apply theme at startup
-    detectAndApplyTheme();
-    prefersDark.addEventListener('change', detectAndApplyTheme);
-  </script>
+  <div id="browser-bar">
+    <input type="text" id="address" placeholder="Enter URL or search term..." autocomplete="off" autofocus />
+    <button id="go-btn">Go</button>
+    <div id="suggestions" tabindex="-1"></div>
+  </div>
+  <div id="tip">Enter a website (e.g. <b>youtube.com</b>) or search term.<br><span style="font-size:0.92em;">Websites and searches will load here.</span></div>
+</div>
+<script>
+const addr=document.getElementById('address'),goBtn=document.getElementById('go-btn'),modeTg=document.getElementById('mode-toggle'),prefersDark=window.matchMedia('(prefers-color-scheme: dark)'),suggestions=document.getElementById('suggestions');
+function setTheme(t){document.body.setAttribute('data-theme',t),document.documentElement.setAttribute('data-theme',t),modeTg.innerText="dark"===t?"☀️":"🌙"}
+function getSavedTheme(){return localStorage.getItem('cloudbrowser-theme')}
+function saveTheme(t){localStorage.setItem('cloudbrowser-theme',t)}
+function detectAndApplyTheme(){const s=getSavedTheme();s?setTheme(s):prefersDark.matches?setTheme("dark"):setTheme("light")}
+modeTg.onclick=function(){const t=document.body.getAttribute('data-theme'),n="dark"===t?"light":"dark";setTheme(n),saveTheme(n)};
+function isProbablyURL(t){return/^https?:\/\//i.test(t)||/^[\w-]+\.[\w./?#=&%-]+$/i.test(t)}
+function load(val){const v=(val!==void 0?val:addr.value).trim();if(!v)return;if(isProbablyURL(v)){let u=v;/^https?:\/\//i.test(u)||(u="http://"+u);window.location.href=u}else{const s=encodeURIComponent(v);window.location.href=`https://www.google.com/search?q=${s}`}}
+goBtn.onclick=()=>{load()};
+addr.addEventListener('keydown',function(e){if(e.key==="Enter"){if(suggActive>-1&&curSuggestions.length){load(curSuggestions[suggActive]);closeSuggestions()}else load()}else if(e.key==="ArrowDown"){if(curSuggestions.length){suggActive=Math.min(suggActive+1,curSuggestions.length-1);updateActive()}}else if(e.key==="ArrowUp"){if(curSuggestions.length){suggActive=Math.max(suggActive-1,0);updateActive()}}});
+let debounceTimer=null,curSuggestions=[],suggActive=-1;
+function fetchSuggestions(q){if(!q.trim()){closeSuggestions();return}fetch(`https://suggestqueries.google.com/complete/search?client=firefox&q=${encodeURIComponent(q)}`).then(r=>r.json()).then(data=>{curSuggestions=data[1]||[];showSuggestions(curSuggestions)}).catch(closeSuggestions)}
+function showSuggestions(list){if(!list.length){closeSuggestions();return}let html='<ul>';for(let i=0;i<list.length;i++)html+=`<li${suggActive===i?' class="selected"':''}>${list[i]}</li>`;html+='</ul>';suggestions.innerHTML=html;suggestions.style.display="block"}
+function closeSuggestions(){suggestions.style.display="none";suggestions.innerHTML="";curSuggestions=[];suggActive=-1}
+function updateActive(){const lis=suggestions.querySelectorAll('li');lis.forEach((li,i)=>{li.classList.toggle('selected',i===suggActive)})}
+addr.addEventListener('input',function(){clearTimeout(debounceTimer);debounceTimer=setTimeout(()=>{fetchSuggestions(addr.value)},150)});
+suggestions.addEventListener('mousedown',function(e){if(e.target.tagName==="LI"){load(e.target.textContent);closeSuggestions()}});
+document.addEventListener('click',function(e){if(!suggestions.contains(e.target)&&e.target!==addr)closeSuggestions()});
+detectAndApplyTheme();prefersDark.addEventListener('change',detectAndApplyTheme);
+</script>
 </body>
 </html>
